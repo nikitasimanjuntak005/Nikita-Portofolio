@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikita Simanjuntak - Portfolio</title>
+    <meta name="description" content="Portfolio of Nikita Simanjuntak, aspiring Data Analyst, Data Scientist, and Business Intelligence Enthusiast.">
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            gold: '#D4AF37',
+                            goldLight: '#E5C158',
+                            goldDark: '#B5952F',
+                        },
+                        dark: {
+                            bg: '#0F172A', // Slate 900
+                            card: '#1E293B', // Slate 800
+                            border: '#334155' // Slate 700
+                        },
+                        light: {
+                            bg: '#F8FAFC', // Slate 50
+                            card: '#FFFFFF',
+                            border: '#E2E8F0' // Slate 200
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for specific effects -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .dark .glass {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background-color: #475569;
+        }
+
+        /* Typing Effect Cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: #D4AF37;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Section Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Skill Bar Animation */
+        .skill-progress {
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #D4AF37, #FDE047);
+        }
+        
+        /* Modern Button Hover */
+        .btn-modern {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .btn-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        .btn-modern:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body class="bg-light-bg text-slate-800 dark:bg-dark-bg dark:text-slate-200 antialiased selection:bg-brand-gold selection:text-white transition-colors duration-300">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 glass border-b border-light-border dark:border-dark-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#home" class="text-2xl font-bold tracking-tighter">
+                        N<span class="text-brand-gold">.</span>S
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-sm font-medium hover:text-brand-gold transition-colors">About</a>
+                    <a href="#experience" class="text-sm font-medium hover:text-brand-gold transition-colors">Experience</a>
+                    <a href="#projects" class="text-sm font-medium hover:text-brand-gold transition-colors">Projects</a>
+                    <a href="#skills" class="text-sm font-medium hover:text-brand-gold transition-colors">Skills</a>
+                    <a href="#contact" class="text-sm font-medium hover:text-brand-gold transition-colors">Contact</a>
+                    
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none" aria-label="Toggle Dark Mode">
+                        <i id="theme-icon" class="fas fa-moon text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center gap-4">
+                     <!-- Theme Toggle Mobile -->
+                     <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none">
+                        <i id="theme-icon-mobile" class="fas fa-moon text-lg"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-slate-600 dark:text-slate-300 hover:text-brand-gold focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-dark-card border-t border-light-border dark:border-dark-border absolute w-full shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:text-brand-gold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors mobile-link">About</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium hover:text-brand-gold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors mobile-link">Experience</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium hover:text-brand-gold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors mobile-link">Projects</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium hover:text-brand-gold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors mobile-link">Skills</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium hover:text-brand-gold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors mobile-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute top-1/4 left-10 w-72 h-72 bg-brand-gold/10 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-brand-gold/10 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse-slow" style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+                
+                <!-- Text Content -->
+                <div class="w-full lg:w-3/5 text-center lg:text-left reveal">
+                    <p class="text-brand-gold font-semibold tracking-wide uppercase text-sm mb-3">Hello, I am</p>
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-4">
+                        Nikita <br class="hidden lg:block"/> Simanjuntak
+                    </h1>
+                    
+                    <div class="h-10 sm:h-12 mb-6">
+                        <h2 class="text-xl sm:text-2xl lg:text-3xl font-medium text-slate-600 dark:text-slate-400">
+                            <span id="typewriter" class="typing-cursor"></span>
+                        </h2>
+                    </div>
+
+                    <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Fresh Graduate in Information Systems from Institut Teknologi Del. Passionate about transforming complex data into actionable business insights using analytics and machine learning.
+                    </p>
+
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                        <a href="CV_Nikita Simanjuntak.pdf" target="_blank" class="btn-modern inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-brand-gold hover:bg-brand-goldDark shadow-lg shadow-brand-gold/30">
+                            <i class="fas fa-download mr-2"></i> Download CV
+                        </a>
+                        <a href="#projects" class="btn-modern inline-flex items-center justify-center px-6 py-3 border-2 border-slate-300 dark:border-slate-600 text-base font-medium rounded-lg text-slate-700 dark:text-slate-200 hover:border-brand-gold hover:text-brand-gold dark:hover:border-brand-gold dark:hover:text-brand-gold transition-colors">
+                            View Projects
+                        </a>
+                        <a href="#contact" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-slate-600 dark:text-slate-400 hover:text-brand-gold transition-colors">
+                            Contact Me <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Image/Visual -->
+                <div class="w-full lg:w-2/5 flex justify-center reveal" style="transition-delay: 0.2s;">
+                    <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+                        <!-- Decorative border -->
+                        <div class="absolute inset-0 border-2 border-brand-gold/50 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                        <div class="absolute inset-4 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+                        
+                        <!-- Profile Image Container -->
+                        <div class="absolute inset-8 rounded-full overflow-hidden border-4 border-white dark:border-dark-card shadow-2xl z-10 bg-slate-100 dark:bg-slate-800">
+                             <img src="Foto Formal (3).png" alt="Nikita Simanjuntak" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/400x400/1E293B/D4AF37?text=NS'">
+                        </div>
+
+                        <!-- Floating Badges -->
+                        <div class="absolute top-10 -left-6 bg-white dark:bg-dark-card p-3 rounded-xl shadow-lg border border-light-border dark:border-dark-border z-20 animate-float">
+                            <i class="fas fa-database text-brand-gold text-2xl"></i>
+                        </div>
+                        <div class="absolute bottom-10 -right-6 bg-white dark:bg-dark-card p-3 rounded-xl shadow-lg border border-light-border dark:border-dark-border z-20 animate-float" style="animation-delay: 1.5s;">
+                            <i class="fas fa-chart-pie text-brand-gold text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
+            <a href="#about" class="text-slate-400 hover:text-brand-gold transition-colors">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white dark:bg-dark-card border-y border-light-border dark:border-dark-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-brand-gold font-semibold tracking-wide uppercase text-sm mb-2">Discover</h2>
+                <h3 class="text-3xl md:text-4xl font-bold">About Me</h3>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h4 class="text-2xl font-semibold mb-4">Professional Summary</h4>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                        I am a highly motivated Information Systems graduate with a strong foundation in statistics, SQL, and Python. Certified as an Associate Data Scientist by BNSP, I possess a deep passion for Data Analytics, Machine Learning, and Business Intelligence.
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                        My approach combines strong analytical thinking with practical problem-solving skills to transform complex datasets into actionable insights. As an independent learner and collaborative team player, I strive to drive continuous improvement and deliver data-driven solutions that support strategic business decision-making.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mt-8">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <span class="font-medium text-sm">Analytical Thinking</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold">
+                                <i class="fas fa-puzzle-piece"></i>
+                            </div>
+                            <span class="font-medium text-sm">Problem Solving</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span class="font-medium text-sm">Team Collaboration</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <span class="font-medium text-sm">Data-Driven</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education & Quick Info -->
+                <div class="space-y-6 reveal" style="transition-delay: 0.2s;">
+                    <div class="glass p-6 rounded-2xl">
+                        <h4 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                            <i class="fas fa-graduation-cap text-brand-gold"></i> Education
+                        </h4>
+                        <div class="border-l-2 border-brand-gold/30 pl-4 ml-2">
+                            <h5 class="font-medium">Institut Teknologi Del</h5>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Bachelor of Information Systems</p>
+                            <p class="text-sm text-brand-gold mt-1">GPA: 3.25 / 4.00 | Jul 2022 - Jul 2026</p>
+                        </div>
+                    </div>
+
+                    <div class="glass p-6 rounded-2xl">
+                        <h4 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                            <i class="fas fa-certificate text-brand-gold"></i> Top Certifications
+                        </h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-brand-gold mt-1 text-sm"></i>
+                                <span class="text-sm">Associate Data Scientist (BNSP) - LSP Teknologi Digital Indonesia</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-brand-gold mt-1 text-sm"></i>
+                                <span class="text-sm">Microsoft AI Fluency</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-brand-gold mt-1 text-sm"></i>
+                                <span class="text-sm">Machine Learning with Python - freeCodeCamp</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Organizations Section -->
+    <section id="experience" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-brand-gold font-semibold tracking-wide uppercase text-sm mb-2">Career Path</h2>
+                <h3 class="text-3xl md:text-4xl font-bold">Experience & Involvement</h3>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Professional Experience -->
+                <div class="reveal">
+                    <h4 class="text-2xl font-semibold mb-8 flex items-center gap-3">
+                        <i class="fas fa-briefcase text-brand-gold"></i> Professional Experience
+                    </h4>
+                    
+                    <div class="relative pl-8 border-l-2 border-slate-200 dark:border-slate-700 space-y-10">
+                        <!-- Timeline Item -->
+                        <div class="relative">
+                            <div class="absolute -left-[41px] top-1 bg-white dark:bg-dark-bg border-4 border-brand-gold w-5 h-5 rounded-full"></div>
+                            <div class="glass p-6 rounded-2xl hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-md">
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
+                                    <h5 class="text-xl font-bold">Software Engineer Intern</h5>
+                                    <span class="text-sm font-medium text-brand-gold bg-brand-gold/10 px-3 py-1 rounded-full w-fit mt-2 sm:mt-0">Jun 2025 - Aug 2025</span>
+                                </div>
+                                <h6 class="text-md text-slate-600 dark:text-slate-400 font-medium mb-4">Telkom Indonesia ROC-1 Medan</h6>
+                                <ul class="list-disc list-inside text-sm text-slate-600 dark:text-slate-400 space-y-2">
+                                    <li>Developed and maintained a web-based monitoring application to support network operations.</li>
+                                    <li>Collected, processed, and analyzed operational data to support monitoring and reporting activities.</li>
+                                    <li>Collaborated with cross-functional teams to improve system performance and operational efficiency.</li>
+                                    <li>Assisted in testing, debugging, and comprehensive documentation.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Organizational Experience -->
+                <div class="reveal" style="transition-delay: 0.2s;">
+                    <h4 class="text-2xl font-semibold mb-8 flex items-center gap-3">
+                        <i class="fas fa-sitemap text-brand-gold"></i> Organizations
+                    </h4>
+                    
+                    <div class="space-y-6">
+                        <!-- Org Item -->
+                        <div class="glass p-5 rounded-2xl flex gap-4 items-start group hover:border-brand-gold/50 transition-colors">
+                            <div class="bg-slate-100 dark:bg-slate-800 p-3 rounded-lg group-hover:bg-brand-gold/10 transition-colors">
+                                <i class="fas fa-users-cog text-xl text-slate-500 dark:text-slate-400 group-hover:text-brand-gold transition-colors"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-lg">Treasurer, Dept. of Social & Religious Affairs</h5>
+                                <p class="text-sm text-brand-gold mb-2">BEM IT Del | Jan 2024 - Feb 2026</p>
+                                <p class="text-sm text-slate-600 dark:text-slate-400">Managed departmental finances, supported social programs, and assisted in organizing community engagement activities.</p>
+                            </div>
+                        </div>
+
+                        <!-- Org Item -->
+                        <div class="glass p-5 rounded-2xl flex gap-4 items-start group hover:border-brand-gold/50 transition-colors">
+                            <div class="bg-slate-100 dark:bg-slate-800 p-3 rounded-lg group-hover:bg-brand-gold/10 transition-colors">
+                                <i class="fas fa-calendar-alt text-xl text-slate-500 dark:text-slate-400 group-hover:text-brand-gold transition-colors"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-lg">Committee Member</h5>
+                                <p class="text-sm text-brand-gold mb-2">Information Systems Student Orientation 2023</p>
+                                <p class="text-sm text-slate-600 dark:text-slate-400">Assisted in planning, organizing, and executing orientation activities for new students.</p>
+                            </div>
+                        </div>
+
+                         <!-- Org Item -->
+                         <div class="glass p-5 rounded-2xl flex gap-4 items-start group hover:border-brand-gold/50 transition-colors">
+                            <div class="bg-slate-100 dark:bg-slate-800 p-3 rounded-lg group-hover:bg-brand-gold/10 transition-colors">
+                                <i class="fas fa-user-friends text-xl text-slate-500 dark:text-slate-400 group-hover:text-brand-gold transition-colors"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-lg">Member</h5>
+                                <p class="text-sm text-brand-gold mb-2">Information Systems Student Association</p>
+                                <p class="text-sm text-slate-600 dark:text-slate-400">Actively participated in student development, departmental activities, and various events organized by HIMSI.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-white dark:bg-dark-card border-y border-light-border dark:border-dark-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-brand-gold font-semibold tracking-wide uppercase text-sm mb-2">Portfolio</h2>
+                <h3 class="text-3xl md:text-4xl font-bold">Featured Projects</h3>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12 reveal">
+                <button class="filter-btn active px-5 py-2 rounded-full text-sm font-medium bg-slate-800 text-white dark:bg-slate-100 dark:text-slate-900 transition-all shadow-md" data-filter="all">All</button>
+                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 transition-all border border-transparent" data-filter="ml">Machine Learning</button>
+                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 transition-all border border-transparent" data-filter="data">Data & Dashboards</button>
+                <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 transition-all border border-transparent" data-filter="web">Web Dev</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="project-card reveal bg-slate-50 dark:bg-dark-bg rounded-2xl overflow-hidden border border-light-border dark:border-dark-border shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full" data-category="ml web">
+                    <div class="p-6 md:p-8 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-gold/10 flex items-center justify-center text-brand-gold">
+                                <i class="fas fa-shield-alt text-2xl"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 bg-slate-200 dark:bg-slate-700 rounded-full">Final Project</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-3 group-hover:text-brand-gold transition-colors">Hybrid Phishing Website Detection</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 line-clamp-3">
+                            Developed a phishing website detection model utilizing Random Forest, XGBoost, and Stacking Ensemble techniques. Integrated SHAP explainability and rule-based filtering to enhance model transparency and detection performance.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6 mt-auto">
+                            <span class="text-xs px-2 py-1 bg-white dark:bg-dark-card border border-light-border dark:border-dark-border rounded">Random Forest</span>
+                            <span class="text-xs px-2 py-1 bg-white dark:bg-dark-card border border-light-border dark:border-dark-border rounded">XGBoost</span>
+                            <span class="text-xs px-2 py-1 bg-white dark:bg-dark-card border border-light-border dark:border-dark-border rounded">SHAP</span>
+                            <span class="text-xs px-2 py-1 bg-white dark:bg-dark-card border border-light-border dark:border-dark-border rounded">Flask</span>
+                        </div>
+                    </div>
+                    <div class="px-6 md:px-8 py-4 border-t border-light-border dark:border-dark-border bg-white dark:bg-dark-card mt-auto">
+                        <a href="https://github.com/nikitasimanjuntak005" target="_blank" class="text-sm font-medium hover:text-brand-gold transition-colors flex items-center gap-2">
+                            <i class="fab fa-github text-lg"></i> View Source
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card reveal bg-slate-50 dark:bg-dark-bg rounded-2xl overflow-hidden border border-light-border dark:border-dark-border shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full" data-category="ml" style="transition-delay: 0.1s;">
+                    <div class="p-6 md:p-8 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-gold/10 flex items-center justify-center text-brand-gold">
+                                <i class="fas fa-book text-2xl"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full">Published (JICSA)</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-3 group-hover:text-brand-gold transition-colors">Book Recommender System</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 line-clamp-3">
+                            Designed and developed a personalized book recommendation engine leveraging Collaborative Filtering and Alternating Least Squares (ALS) algorithms to improve user experience.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6 mt-auto">
+                            <span class="text-xs px-2 py-1 bg-white dark:bg-dark-card border border-light-border dark:border-dark-border rounded">Python</span>
+                            <span class="text-xs px-2 py-1 bg-white dark:bg-dark-card border border-light-border dark:border-dark-border rounded">Collaborative Filtering</span>
+                            <span class="text-xs px-2 py-1 bg-white dark:bg-dark-card border border-light-border dark:border-dark-border rounded">ALS</span>
+                        </div>
+                    </div>
+                    <div class="px-6 md:px-8 py-4 border-t border-light-border dark:border-dark-border bg-white dark:bg-dark-card mt-auto">
+                        <a href="https://github.com/nikitasimanjuntak005" target="_blank" class="text-sm font-medium hover:text-brand-gold transition-colors flex items-center gap-2">
+                            <i class="fab fa-github text-lg"></i> View Source
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card reveal bg-slate-50 dark:bg-dark-bg rounded-2xl overflow-hidden border border-light-border dark:border-dark-border shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full" data-category="data" style="transition-delay: 0.2s;">
+                    <div class="p-6 md:p-8 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-gold/10 flex items-center justify-center text-brand-gold">
+                                <i class="fas fa-chart-bar text-2xl"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold mb-3 group-hover:text-brand-gold transition-colors">Student Admission Data Mart Dashboard</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 line-clamp-3">
+                            Developed end-to-end ETL processes and created an interactive dashboard to analyze student admission trends, facilitating data-driven decision-making for university administration.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6 mt-auto">
+                            <span class="text-xs px-2 py-1 bg-white dark:bg-dark-card border border-light-border dark:border-dark-border rounded">SQL</span>
+                            <span class="text-xs px-2 py-1 bg-white dark:bg-dark-card border border-light-border dark:border-dark-border rounded">Pentaho (ETL)</span>
+                            <span class="text-xs px-2 py-1 bg-white dark:bg-dark-card border border-light-border dark:border-dark-border rounded">Tableau</span>
+                        </div>
+                    </div>
+                    <div class="px-6 md:px-8 py-4 border-t border-light-border dark:border-dark-border bg-white dark:bg-dark-card mt-auto">
+                        <a href="https://github.com/nikitasimanjuntak005" target="_blank" class="text-sm font-medium hover:text-brand-gold transition-colors flex items-center gap-2">
+                            <i class="fab fa-github text-lg"></i> View Source
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card reveal bg-slate-50 dark:bg-dark-bg rounded-2xl overflow-hidden border border-light-border dark:border-dark-border shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full" data-category="data" style="transition-delay: 0.3s;">
+                    <div class="p-6 md:p-8 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-gold/10 flex items-center justify-center text-brand-gold">
+                                <i class="fas fa-heartbeat text-2xl"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold mb-3 group-hover:text-brand-gold transition-colors">Healthcare ROI Dashboard</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 line-clamp-3">
+                            Developed an interactive visualization dashboard to analyze the complex relationship between healthcare spending and life expectancy across different countries to evaluate ROI.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6 mt-auto">
+                            <span class="text-xs px-2 py-1 bg-white dark:bg-dark-card border border-light-border dark:border-dark-border rounded">Python</span>
+                            <span class="text-xs px-2 py-1 bg-white dark:bg-dark-card border border-light-border dark:border-dark-border rounded">Tableau</span>
+                            <span class="text-xs px-2 py-1 bg-white dark:bg-dark-card border border-light-border dark:border-dark-border rounded">Data Analysis</span>
+                        </div>
+                    </div>
+                    <div class="px-6 md:px-8 py-4 border-t border-light-border dark:border-dark-border bg-white dark:bg-dark-card mt-auto">
+                        <a href="https://github.com/nikitasimanjuntak005" target="_blank" class="text-sm font-medium hover:text-brand-gold transition-colors flex items-center gap-2">
+                            <i class="fab fa-github text-lg"></i> View Source
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-brand-gold font-semibold tracking-wide uppercase text-sm mb-2">Expertise</h2>
+                <h3 class="text-3xl md:text-4xl font-bold">Technical Skills</h3>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Category 1: Data -->
+                <div class="glass p-6 rounded-2xl reveal hover:-translate-y-2 transition-transform duration-300">
+                    <div class="text-center mb-6">
+                        <div class="w-14 h-14 mx-auto bg-brand-gold/10 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-chart-line text-2xl text-brand-gold"></i>
+                        </div>
+                        <h4 class="font-bold text-lg">Data & Analytics</h4>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="skill-item">
+                            <div class="flex justify-between text-sm mb-1"><span>Python (Pandas, NumPy)</span><span>90%</span></div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-brand-gold h-1.5 rounded-full skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between text-sm mb-1"><span>Tableau</span><span>85%</span></div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-brand-gold h-1.5 rounded-full skill-progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between text-sm mb-1"><span>Power BI</span><span>80%</span></div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-brand-gold h-1.5 rounded-full skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between text-sm mb-1"><span>Scikit-learn / ML</span><span>75%</span></div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-brand-gold h-1.5 rounded-full skill-progress" data-width="75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 2: Database -->
+                <div class="glass p-6 rounded-2xl reveal hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 0.1s;">
+                    <div class="text-center mb-6">
+                        <div class="w-14 h-14 mx-auto bg-brand-gold/10 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-database text-2xl text-brand-gold"></i>
+                        </div>
+                        <h4 class="font-bold text-lg">Database</h4>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="skill-item">
+                            <div class="flex justify-between text-sm mb-1"><span>SQL</span><span>95%</span></div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-brand-gold h-1.5 rounded-full skill-progress" data-width="95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between text-sm mb-1"><span>MySQL</span><span>90%</span></div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-brand-gold h-1.5 rounded-full skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between text-sm mb-1"><span>SQL Server</span><span>85%</span></div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-brand-gold h-1.5 rounded-full skill-progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between text-sm mb-1"><span>MongoDB</span><span>70%</span></div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-brand-gold h-1.5 rounded-full skill-progress" data-width="70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 3: Programming -->
+                <div class="glass p-6 rounded-2xl reveal hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 0.2s;">
+                    <div class="text-center mb-6">
+                        <div class="w-14 h-14 mx-auto bg-brand-gold/10 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-code text-2xl text-brand-gold"></i>
+                        </div>
+                        <h4 class="font-bold text-lg">Programming</h4>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="skill-item">
+                            <div class="flex justify-between text-sm mb-1"><span>Python</span><span>90%</span></div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-brand-gold h-1.5 rounded-full skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between text-sm mb-1"><span>Java</span><span>75%</span></div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-brand-gold h-1.5 rounded-full skill-progress" data-width="75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between text-sm mb-1"><span>PHP / Laravel</span><span>70%</span></div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-brand-gold h-1.5 rounded-full skill-progress" data-width="70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between text-sm mb-1"><span>HTML/CSS/JS</span><span>80%</span></div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-brand-gold h-1.5 rounded-full skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 4: Tools -->
+                <div class="glass p-6 rounded-2xl reveal hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 0.3s;">
+                    <div class="text-center mb-6">
+                        <div class="w-14 h-14 mx-auto bg-brand-gold/10 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-tools text-2xl text-brand-gold"></i>
+                        </div>
+                        <h4 class="font-bold text-lg">Tools & Others</h4>
+                    </div>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-medium border border-light-border dark:border-dark-border">Git</span>
+                        <span class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-medium border border-light-border dark:border-dark-border">GitHub</span>
+                        <span class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-medium border border-light-border dark:border-dark-border">VS Code</span>
+                        <span class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-medium border border-light-border dark:border-dark-border">Jupyter Notebook</span>
+                        <span class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-medium border border-light-border dark:border-dark-border">Excel</span>
+                        <span class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-medium border border-light-border dark:border-dark-border">Pentaho</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-white dark:bg-dark-card border-t border-light-border dark:border-dark-border">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-brand-gold font-semibold tracking-wide uppercase text-sm mb-2">Get in touch</h2>
+                <h3 class="text-3xl md:text-4xl font-bold">Contact Me</h3>
+                <p class="text-slate-600 dark:text-slate-400 mt-4 max-w-2xl mx-auto">
+                    I am currently open for opportunities in Data Analytics, Data Science, and Business Intelligence. Feel free to reach out!
+                </p>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+                <!-- Contact Info Cards -->
+                <a href="mailto:nikijuntak123@gmail.com" class="glass p-6 rounded-2xl flex flex-col items-center text-center hover:border-brand-gold transition-colors group">
+                    <div class="w-12 h-12 bg-brand-gold/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-envelope text-xl text-brand-gold"></i>
+                    </div>
+                    <h4 class="font-bold mb-1">Email</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">nikijuntak123@gmail.com</p>
+                </a>
+                
+                <a href="https://wa.me/6281397541049" target="_blank" class="glass p-6 rounded-2xl flex flex-col items-center text-center hover:border-brand-gold transition-colors group">
+                    <div class="w-12 h-12 bg-brand-gold/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-whatsapp text-xl text-brand-gold"></i>
+                    </div>
+                    <h4 class="font-bold mb-1">Phone / WhatsApp</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">+62 813-9754-1049</p>
+                </a>
+
+                <a href="https://www.linkedin.com/in/nikita-simanjuntak" target="_blank" class="glass p-6 rounded-2xl flex flex-col items-center text-center hover:border-brand-gold transition-colors group">
+                    <div class="w-12 h-12 bg-brand-gold/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-linkedin-in text-xl text-brand-gold"></i>
+                    </div>
+                    <h4 class="font-bold mb-1">LinkedIn</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">nikita-simanjuntak</p>
+                </a>
+
+                <a href="https://github.com/nikitasimanjuntak005" target="_blank" class="glass p-6 rounded-2xl flex flex-col items-center text-center hover:border-brand-gold transition-colors group">
+                    <div class="w-12 h-12 bg-brand-gold/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-github text-xl text-brand-gold"></i>
+                    </div>
+                    <h4 class="font-bold mb-1">GitHub</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">nikitasimanjuntak005</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-slate-50 dark:bg-dark-bg border-t border-light-border dark:border-dark-border text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-slate-600 dark:text-slate-400">
+                &copy; <span id="year"></span> Nikita Simanjuntak. All rights reserved.
+            </p>
+            <div class="flex space-x-4">
+                <a href="https://www.linkedin.com/in/nikita-simanjuntak" target="_blank" class="text-slate-400 hover:text-brand-gold transition-colors"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/nikitasimanjuntak005" target="_blank" class="text-slate-400 hover:text-brand-gold transition-colors"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-brand-gold text-white rounded-full shadow-lg shadow-brand-gold/30 flex items-center justify-center translate-y-20 opacity-0 transition-all duration-300 hover:bg-brand-goldDark z-50 focus:outline-none">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            document.getElementById('year').textContent = '2026';
+
+            // --- Theme Toggle Logic ---
+            const html = document.documentElement;
+            const themeToggles = [document.getElementById('theme-toggle'), document.getElementById('theme-toggle-mobile')];
+            const themeIcons = [document.getElementById('theme-icon'), document.getElementById('theme-icon-mobile')];
+
+            // Check system preference or localStorage
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                html.classList.add('dark');
+                updateIcons('dark');
+            } else {
+                html.classList.remove('dark');
+                updateIcons('light');
+            }
+
+            function updateIcons(theme) {
+                themeIcons.forEach(icon => {
+                    if (icon) {
+                        if (theme === 'dark') {
+                            icon.classList.replace('fa-moon', 'fa-sun');
+                            icon.classList.add('text-yellow-400');
+                        } else {
+                            icon.classList.replace('fa-sun', 'fa-moon');
+                            icon.classList.remove('text-yellow-400');
+                        }
+                    }
+                });
+            }
+
+            themeToggles.forEach(toggle => {
+                if(toggle) {
+                    toggle.addEventListener('click', () => {
+                        html.classList.toggle('dark');
+                        const isDark = html.classList.contains('dark');
+                        localStorage.theme = isDark ? 'dark' : 'light';
+                        updateIcons(isDark ? 'dark' : 'light');
+                    });
+                }
+            });
+
+
+            // --- Mobile Menu Logic ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.replace('fa-times', 'fa-bars');
+                } else {
+                    icon.classList.replace('fa-bars', 'fa-times');
+                }
+            });
+
+            // Close mobile menu when clicking a link
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                });
+            });
+
+
+            // --- Navbar Scroll Effect ---
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-md');
+                    navbar.classList.replace('border-b', 'border-transparent');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                    navbar.classList.replace('border-transparent', 'border-b');
+                }
+            });
+
+
+            // --- Typing Animation ---
+            const phrases = ["Data Analyst", "Data Scientist", "Business Intelligence", "Problem Solver"];
+            const typingElement = document.getElementById('typewriter');
+            let phraseIndex = 0;
+            let letterIndex = 0;
+            let currentText = '';
+            let isDeleting = false;
+
+            function type() {
+                if(!typingElement) return;
+
+                const currentPhrase = phrases[phraseIndex];
+                
+                if (isDeleting) {
+                    currentText = currentPhrase.substring(0, letterIndex - 1);
+                    letterIndex--;
+                } else {
+                    currentText = currentPhrase.substring(0, letterIndex + 1);
+                    letterIndex++;
+                }
+
+                typingElement.innerHTML = `<span class="text-brand-gold">${currentText}</span>`;
+
+                let typeSpeed = 100;
+                if (isDeleting) typeSpeed /= 2;
+
+                if (!isDeleting && letterIndex === currentPhrase.length) {
+                    typeSpeed = 2000; // Pause at end of phrase
+                    isDeleting = true;
+                } else if (isDeleting && letterIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    typeSpeed = 500; // Pause before new phrase
+                }
+
+                setTimeout(type, typeSpeed);
+            }
+            setTimeout(type, 1000); // Start delay
+
+
+            // --- Scroll Reveal & Skill Bar Animation ---
+            const revealElements = document.querySelectorAll('.reveal');
+            const skillBars = document.querySelectorAll('.skill-progress');
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        
+                        // Trigger skill bar animation if it's within a revealed section
+                        const sectionSkillBars = entry.target.querySelectorAll('.skill-progress');
+                        sectionSkillBars.forEach(bar => {
+                             bar.style.width = bar.getAttribute('data-width');
+                        });
+                        
+                        // Stop observing once revealed
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null,
+                threshold: 0.1, // Trigger when 10% visible
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+
+            // --- Project Filtering ---
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button styling
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-slate-800', 'text-white', 'dark:bg-slate-100', 'dark:text-slate-900', 'shadow-md', 'active');
+                        b.classList.add('bg-slate-100', 'text-slate-600', 'dark:bg-slate-800', 'dark:text-slate-300');
+                    });
+                    btn.classList.add('bg-slate-800', 'text-white', 'dark:bg-slate-100', 'dark:text-slate-900', 'shadow-md', 'active');
+                    btn.classList.remove('bg-slate-100', 'text-slate-600', 'dark:bg-slate-800', 'dark:text-slate-300');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    projectCards.forEach(card => {
+                        const categories = card.getAttribute('data-category').split(' ');
+                        
+                        if (filterValue === 'all' || categories.includes(filterValue)) {
+                            card.style.display = 'flex'; // Keep flex layout
+                            // Slight delay for smooth reappearance
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            }, 50);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.95)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300); // Wait for transition
+                        }
+                    });
+                });
+            });
+
+
+            // --- Back to Top Button ---
+            const backToTopBtn = document.getElementById('back-to-top');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    backToTopBtn.classList.remove('opacity-0', 'translate-y-20', 'pointer-events-none');
+                    backToTopBtn.classList.add('opacity-100', 'translate-y-0', 'cursor-pointer');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'translate-y-20', 'pointer-events-none');
+                    backToTopBtn.classList.remove('opacity-100', 'translate-y-0', 'cursor-pointer');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Initial check for elements in viewport on load
+            setTimeout(() => {
+                const scrollEvent = new Event('scroll');
+                window.dispatchEvent(scrollEvent);
+            }, 100);
+        });
+    </script>
+</body>
+</html>
